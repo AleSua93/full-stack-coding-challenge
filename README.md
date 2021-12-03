@@ -12,6 +12,10 @@ You'll be building a tiny app to look up airport information. In its current sta
 
 Please build a typeahead search feature so the user can look up airports by searching for airports by name, IATA, city, or country.
 
+The designer gave you this mock-up as a reference:
+
+![image](https://user-images.githubusercontent.com/144075/144594282-68de44cd-bef2-4d9d-8c5d-398862cbc964.png)
+
 ## Assumptions
 
 - Tilla uses Next.JS/React and TypeScript. It'd be cool if you use that same tech stack for this exercise.
@@ -29,7 +33,7 @@ We'd love to hear your thoughts on some of these questions. Please don't spend m
 
 ## Deliverables
 
-- Invite [@ffiller](https://github.com/ffiller), [@pieterbeulque](https://github.com/pieterbeulque), and [@marcqualie](https://github.com/marcqualie) to a GitHub repo with your completed project
+- Invite [@pieterbeulque](https://github.com/pieterbeulque) to a GitHub repo with your completed project
 - A video of your screen recording (unlisted YouTube video, Loom, … anything works)
 - Answers to the questions above can be either in the video or written down in the README of your repo
 
