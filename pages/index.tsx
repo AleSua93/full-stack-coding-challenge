@@ -1,32 +1,44 @@
 import { NextPage } from 'next'
 import Link from 'next/link'
+import { SyntheticEvent, useState } from 'react'
+import AirportsList from '../components/airports-list'
 
 import Layout from '../components/layout'
 import useApiData from '../hooks/use-api-data'
 import Airport from '../types/airport'
 
 const Page: NextPage = () => {
-  const airports = useApiData<Airport[]>('/api/airports', [])
+  const [query, setQuery] = useState("")
+  const { data: airports, clearResults } = useApiData<Airport[]>('/api/airports', query)
+
+  const searchAirports = (ev: SyntheticEvent) => {
+    const target = ev.target as HTMLInputElement;
+
+    if (target.value.length > 3) {
+      setQuery(target.value);
+    } else if (!target.value.length) {
+      clearResults();
+    }
+  }
 
   return <Layout>
     <h1 className='text-2xl font-bold'>Code Challenge: Airports</h1>
 
-    <h2 className="mt-10 text-xl font-semibold">All Airports</h2>
+    <input
+      type="text"
+      placeholder="Start typing..."
+      className="border border-gray-300 rounded-md p-3 my-8"
+      onChange={searchAirports}
+    />
 
-    <div>
-      {airports.map(airport => (
-        <Link href={`/airports/${airport.iata.toLowerCase()}`} key={airport.iata}>
-          <a className='flex items-center p-5 mt-5 text-gray-800 border border-gray-200 rounded-lg shadow-sm hover:border-blue-600 focus:border-blue-600 focus:ring focus:ring-blue-200 focus:outline-none'>
-            <span>
-              {airport.name}, {airport.city}
-            </span>
-            <span className='ml-auto text-gray-500'>
-              {airport.country}
-            </span>
-          </a>
-        </Link>
-      ))}
+    <div className="flex flex-column gap-2 align-center">
+      <h2 className="text-xl font-semibold">Airports</h2>
+      <div className="bg-blue-500 text-white font-bold px-3 rounded-full">
+        {airports.length}
+      </div>
     </div>
+
+    <AirportsList airports={airports}/>
   </Layout>
 }
 

@@ -5,6 +5,12 @@ export const findAirportByIata = async (iata: string): Promise<Airport | undefin
   return airports.find(airport => airport.iata === iata.toUpperCase())
 }
 
-export const allAirports = async (): Promise<Airport[]> => {
-  return airports
+export const allAirports = async (query?: string): Promise<Airport[]> => {
+  if (!query) return [];
+
+  return airports.filter((airport) => {
+    const textOnlyAirport = JSON.stringify(airport);
+
+    return textOnlyAirport.toLowerCase().includes(query);
+  });
 }
